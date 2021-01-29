@@ -7,6 +7,9 @@ with open('README.md') as readme_file:
     readme = readme_file.read()
 
 requirements = [
+    "re",
+    "torch=1.7.1",
+    "torchvision",
     "model-tools @ git+https://github.com/brain-score/model-tools",
     "numpy",
     'xarray',

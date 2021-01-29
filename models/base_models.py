@@ -1,31 +1,30 @@
+import re
+import sys
+import functools
+sys.path.append('CLIP/')
+import torch
+from CLIP import clip
+from model_tools.activations.pytorch import PytorchWrapper
+from model_tools.activations.pytorch import load_preprocess_images
 from model_tools.check_submission import check_models
-
 """
 Template module for a base model submission to brain-score
 """
 
-
 def get_model_list():
-    """
-    This method defines all submitted model names. It returns a list of model names.
-    The name is then used in the get_model method to fetch the actual model instance.
-    If the submission contains only one model, return a one item list.
-    :return: a list of model string names
-    """
-    return []
+    #return ['ViT-B/32', 'RN50']
+    return ['ViT-B/32']
 
 
 def get_model(name):
-    """
-    This method fetches an instance of a base model. The instance has to be callable and return a xarray object,
-    containing activations. There exist standard wrapper implementations for common libraries, like pytorch and
-    keras. Checkout the examples folder, to see more. For custom implementations check out the implementation of the
-    wrappers.
-    :param name: the name of the model to fetch
-    :return: the model instance
-    """
-    return
-
+    assert name in ['ViT-B/32', 'RN50']
+    model, _ = clip.load(name, jit=False)
+    model = model.visual
+    model.to(torch.float32, non_blocking=False)    # cast all weights from HalfTensors to FloatTensor
+    preprocessing = functools.partial(load_preprocess_images, image_size=224)
+    wrapper = PytorchWrapper(identifier='clip', model=model, preprocessing=preprocessing)
+    wrapper.image_size = 224
+    return wrapper
 
 def get_layers(name):
     """
@@ -37,17 +36,20 @@ def get_layers(name):
     :param name: the name of the model, to return the layers for
     :return: a list of strings containing all layers, that should be considered as brain area.
     """
-    return []
+    if name == 'ViT-B/32':
+        num_layers = 12
+        layers = [f'transformer.resblocks.{i}.ln_2' for i in range(num_layers)]
+    return layers
 
 
 def get_bibtex(model_identifier):
-    """
-    A method returning the bibtex reference of the requested model as a string.
-    """
-    return ''
+    return """@article{radford2learning,
+                    title={Learning Transferable Visual Models From Natural Language Supervision},
+                    author={Radford, Alec and Kim, Jong Wook and Hallacy, Chris and Ramesh, Aditya and Goh, Gabriel and Agarwal, Sandhini and Sastry, Girish and Askell, Amanda and Mishkin, Pamela and Clark, Jack and others},
+                    journal={Image},
+                    volume={2},
+                    pages={T2}}"""
 
 
 if __name__ == '__main__':
-    # Use this method to ensure the correctness of the BaseModel implementations.
-    # It executes a mock run of brain-score benchmarks.
     check_models.check_base_models(__name__)
