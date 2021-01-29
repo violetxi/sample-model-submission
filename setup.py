@@ -6,12 +6,16 @@ from setuptools import setup, find_packages
 with open('README.md') as readme_file:
     readme = readme_file.read()
 
-requirements = [
+with open('requirements.txt') as f:
+    requirements = f.read().splitlines()
+    
+requirements += [    
     "model-tools @ git+https://github.com/brain-score/model-tools",
     "numpy",
     'xarray',
     "result_caching @ git+https://github.com/mschrimpf/result_caching"
 ]
+print(requirements)
 
 setup(
     name='model-template',
@@ -36,3 +40,4 @@ setup(
     ],
     test_suite='tests',
 )
+
