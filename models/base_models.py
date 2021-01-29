@@ -27,18 +27,9 @@ def get_model(name):
     return wrapper
 
 def get_layers(name):
-    """
-    This method returns a list of string layer names to consider per model. The benchmarks maps brain regions to
-    layers and uses this list as a set of possible layers. The lists doesn't have to contain all layers, the less the
-    faster the benchmark process works. Additionally the given layers have to produce an activations vector of at least
-    size 25! The layer names are delivered back to the model instance and have to be resolved in there. For a pytorch
-    model, the layer name are for instance dot concatenated per module, e.g. "features.2".
-    :param name: the name of the model, to return the layers for
-    :return: a list of strings containing all layers, that should be considered as brain area.
-    """
     if name == 'ViT-B/32':
         num_layers = 12
-        layers = [f'transformer.resblocks.{i}.ln_2' for i in range(num_layers)]
+        layers = [f'transformer.resblocks.{i}' for i in range(num_layers)]
     return layers
 
 
