@@ -10,20 +10,20 @@ requirements = [
     "re",
     "torch=1.7.1",
     "torchvision",
-    #"model-tools @ git+https://github.com/brain-score/model-tools",
+    "model-tools @ git+https://github.com/brain-score/model-tools",    
     "numpy",
     'xarray',
     "result_caching @ git+https://github.com/mschrimpf/result_caching"
 ]
 
 setup(
-    name='model-template',
+    name='openai-CLIP',
     version='0.1.0',
-    description="An example project for adding brain or base model implementation",
+    description="OpenAI CLIP released models",
     long_description=readme,
-    author="Franziska Geiger",
-    author_email='fgeiger@mit.edu',
-    url='https://github.com/brain-score/brainscore_model_template',
+    author="OpenAI",
+    author_email='',
+    url='https://github.com/openai/CLIP',
     packages=find_packages(exclude=['tests']),
     include_package_data=True,
     install_requires=requirements,
