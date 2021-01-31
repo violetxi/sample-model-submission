@@ -4,6 +4,7 @@ import functools
 sys.path.append('CLIP/')
 import torch
 from CLIP import clip
+sys.path.append('/mnt/fs1/ziyxiang/model-tools/')
 from model_tools.activations.pytorch import PytorchWrapper
 from model_tools.activations.pytorch import load_preprocess_images
 from model_tools.check_submission import check_models
@@ -14,7 +15,6 @@ Template module for a base model submission to brain-score
 def get_model_list():
     #return ['ViT-B/32', 'RN50']
     return ['ViT-B/32']
-
 
 def get_model(name):
     assert name in ['ViT-B/32', 'RN50']
