@@ -10,7 +10,7 @@ requirements = [
     "re",
     "torch=1.7.1",
     "torchvision",
-    "model-tools @ git+https://github.com/brain-score/model-tools",
+    #"model-tools @ git+https://github.com/brain-score/model-tools",
     "numpy",
     'xarray',
     "result_caching @ git+https://github.com/mschrimpf/result_caching"
