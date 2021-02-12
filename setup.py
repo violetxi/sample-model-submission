@@ -5,16 +5,15 @@ from setuptools import setup, find_packages
 
 with open('README.md') as readme_file:
     readme = readme_file.read()
-
-with open('requirements.txt') as f:
-    requirements = f.read().splitlines()
     
-requirements += [    
+requirements = [    
     "model-tools @ git+https://github.com/brain-score/model-tools",
     "numpy",
     'xarray',
     "result_caching @ git+https://github.com/mschrimpf/result_caching"
 ]
+with open('requirements.txt') as f:
+    requirements += f.read().splitlines()
 print(requirements)
 
 setup(
