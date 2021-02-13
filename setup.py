@@ -10,11 +10,12 @@ requirements = [
     "model-tools @ git+https://github.com/brain-score/model-tools",
     "numpy",
     'xarray',
-    "result_caching @ git+https://github.com/mschrimpf/result_caching"
+    "result_caching @ git+https://github.com/mschrimpf/result_caching",
+    'torch==1.7.0',
+    'torchvision==0.8.1',
+    'timm==0.3.2',
+    'scikit-learn==0.23.2'
 ]
-with open('requirements.txt') as f:
-    requirements += f.read().splitlines()
-print(requirements)
 
 setup(
     name='model-template',
