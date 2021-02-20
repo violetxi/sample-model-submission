@@ -11,8 +11,8 @@ requirements = [
     "numpy",
     'xarray',
     "result_caching @ git+https://github.com/mschrimpf/result_caching",
-    'torch==1.7.0',
-    'torchvision==0.8.1',
+    'torch',
+    'torchvision',
     'timm==0.3.2',
     'scikit-learn==0.23.2'
 ]
