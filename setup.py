@@ -14,7 +14,6 @@ requirements = [
     'torch',
     'torchvision',
     'timm==0.3.2',
-    'scikit-learn==0.23.2'
 ]
 
 setup(

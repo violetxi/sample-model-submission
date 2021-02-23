@@ -19,7 +19,12 @@ def get_model_list():
 def get_model(name):
     assert name == 'deit'
     with torch.no_grad():
-        model = torch.hub.load('facebookresearch/deit:main', 'deit_base_patch16_224', pretrained=True)
+        model = torch.hub.load(
+            'facebookresearch/deit:main',
+            'deit_base_patch16_224',
+            force_reload=True,
+            pretrained=True
+        )
     preprocessing = functools.partial(load_preprocess_images, image_size=224)
     wrapper = PytorchWrapper(identifier='deit', model=model, preprocessing=preprocessing)
     wrapper.image_size = 224
